@@ -14,7 +14,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
-var dbConfig   = require('./config/database.js'); // set-up mongoDB url
+var dbConfig     = require('./config/database.js'); // set-up mongoDB url
 
 // configuration
 mongoose.connect(dbConfig.url); // connect to our mongoDB database
