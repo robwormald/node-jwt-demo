@@ -1,0 +1,46 @@
+body { 
+  padding-top:80px;
+  word-wrap:break-word; 
+}
+video#bgvid {
+  position: fixed; right: 0; bottom: 0;
+  min-width: 100%; min-height: 100%;
+  width: auto; height: auto; z-index: -100;
+  background: url(polina.jpg) no-repeat;
+  background-size: cover;
+}
+
+.login-failed {
+  color: #FFF;
+  width: 600px;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  margin-top: -41px;
+  margin-left: -300px;
+  text-align: center;
+}
+
+.login-failed h2 {
+  margin: 0 0 20px 0;
+}
+
+.login-failed span {
+  outline: 0;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background: #FFF;
+  color: #333;
+  border: none;
+  padding: 12px 20px;
+}
+
+.login-failed span a {
+  text-decoration: none;
+}
+
+.jumbotron {
+  background-color: #F4726D;
+  color: #FFFFFF;
+}

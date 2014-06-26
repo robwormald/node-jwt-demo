@@ -1,14 +1,12 @@
-// server.js
+// Load dependencies 
+var express       = require('express');
+var app           = express();
+var port          = process.env.PORT || 8000;
+var mongoose      = require('mongoose');
+var passport      = require('passport');
+var flash         = require('connect-flash');
 
-// set-up all the required tools!
-var express  = require('express');
-var app      = express();
-var port     = process.env.PORT || 8000;
-var mongoose = require('mongoose');
-var passport = require('passport');
-var flash    = require('connect-flash');
-
-// express middleware..?
+// Express Middleware
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
@@ -19,21 +17,25 @@ var dbConfig     = require('./config/database.js'); // set-up mongoDB url
 // configuration
 mongoose.connect(dbConfig.url); // connect to our mongoDB database
 
-// set-up Express application
-app.set('view engine', 'ejs'); // ejs templating (not sure if needed..)
-app.use(morgan('dev')); // this will log every request to the console
-app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser()); // get information from HTML forms
+require('./config/passport')(passport); // passes passport for configuration
 
-// required for passport
-app.use(session({ secret : 'gethired' })); // session secret
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash()) // use connect-flash for flash messages
+  // Set-up Express Application
+  app.set('view engine', 'ejs'); // ejs templating (temporary until Angular... if I have time)
+  app.use(morgan('dev')); // Log all requests to console
+  app.use(cookieParser()); // Read cookies for auth
+  app.use(bodyParser()); // Get information from HTML forms
 
-// routing
-require('./app/routes.js')(app, passport); // load routes and pass in our app and fully configured passport
+  // required for passport
+  app.use(session({ secret : 'gethired' })); // Session Secret
+  app.use(passport.initialize());
+  app.use(passport.session()); // Persistent Login Sessions
+  app.use(flash()) // Connect-Flash for Flash Messages (if I have time..)
+  // Media
+  app.use(express.static(__dirname + '/public'));
 
-// launch the thing
+// Routing
+require('./app/routes.js')(app, passport); // Load routes and pass in our app and fully configured passport
+
+// Launch the beast
 app.listen(port);
 console.log('IM ALIVEEEE! on.. port ' + port);
