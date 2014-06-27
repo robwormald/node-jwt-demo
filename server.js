@@ -34,7 +34,7 @@ require('./config/passport')(passport); // passes passport for configuration
   app.use(express.static(__dirname + '/public'));
 
 // Routing
-require('./app/routes.js')(app, passport); // Load routes and pass in our app and fully configured passport
+require('./config/routes.js')(app, passport); // Load routes and pass in our app and fully configured passport
 
 // Launch the beast
 app.listen(port);
