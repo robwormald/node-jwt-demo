@@ -1,30 +1,35 @@
+
+//Taylor change here
+var User = require('../app/models/user');
+
 module.exports = function(app, passport) {
 
-// get /index
+//Taylor change here
 app.get('/', function(req, res) {
-  res.render('index.ejs');
+    res.sendfile('./public/views/index.html');    
 });
+
 
 // GET /login
+//Taylor Change Here
 app.get('/login', function(req, res) {
-  res.render('login.ejs');
+  res.sendfile('./public/views/login.html');
 });
-
-// POST /login
-app.post('/login', passport.authenticate('local-login', {
+//Taylor change here
+app.post('/api/login', passport.authenticate('local-login', {
   successRedirect : '/profile', // redirects to profile
   failureRedirect : '/loginFailure', // redirects back to login
 }));
 
 // GET /sign-up
 app.get('/sign-up', function(req, res) {
-  res.render('sign-up.ejs');
+  res.sendfile('./public/views/signup.html');
 });
 
 // POST /sign-up
-app.post('/sign-up', passport.authenticate('local-signup', {
+app.post('/api/sign-up', passport.authenticate('local-signup', {
   successRedirect : '/profile', // redirect to the secure profile section
-  failureRedirect : '/loginFailure', // redirect back to the signup page if there is an error
+  failureRedirect : '/usernameTaken', // redirect back to the signup page if there is an error
 }));
 
 // GET /profile
@@ -36,13 +41,15 @@ app.get('/profile', isLoggedIn, function(req, res) {
 
 
 // Tests
+
 // Failures/Success (Tests)
 app.get('/loginFailure', function(req, res) {
-  res.render('login-failure.ejs');
+  res.sendfile('./public/views/login-failure.html');
 });
 
-app.get('/loginSuccess', function(req, res) {
-  res.send('Successfully authenticated');
+// Username is taken failure
+app.get('/usernameTaken', function(req, res) {
+  res.sendfile('./public/views/username-taken.html');
 });
 
 }
