@@ -1,4 +1,5 @@
 var User = require('../app/models/user');
+var TokenAuth = require('./tokens');
 
 module.exports = function(app, passport) {
 
@@ -21,7 +22,7 @@ app.post('/api/sign-up', passport.authenticate('local-signup', {
 ////////////////////////////////
 
 app.get('/', function(req, res) {
-    res.sendfile('./public/views/index.html');    
+    res.sendfile('./public/views/index.html');
 });
 
 app.get('/login', function(req, res) {
@@ -37,6 +38,21 @@ app.get('/profile', isLoggedIn, function(req, res) {
     user : req.user // gets user out of session and passes to the template
   });
 });
+
+////////////////////////
+// Angular Auth Routes //
+////////////////////////
+
+//issue a token = kinda like "login"
+app.post('/api/getToken',TokenAuth.issueToken);
+
+//get a token's info / validity.
+app.get('/api/tokenInfo',TokenAuth.verifyToken,function(req,res){
+
+    res.json(req.user);
+})
+
+
 
 ////////////////////////
 // Failure Re-directs //
