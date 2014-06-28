@@ -18,6 +18,46 @@ function verifyUser(username, password, done) {
   });
 }
 
+function registerUser(newUserInfo,done){
+
+    User.findOne({ 'local.username' : newUserInfo.username }, function(err, user) {
+      if (err)
+        return done(err);
+
+      if (user) {
+        return done(null, false);
+
+     } else {
+      // Create User
+      var newUser = new User();
+      newUser.local.username = newUserInfo.username;
+      newUser.local.password = newUser.generateHash(newUserInfo.password);
+      // Additional Fields
+      newUser.local.firstname = newUserInfo.firstname; // added 'First Name' user field
+      newUser.local.lastname  = newUserInfo.lastname; // added 'Last Name' user field
+      // Save User
+      newUser.save(function(err) {
+        if (err)
+          throw err;
+        return done(null, newUser);
+      });
+     }
+    });
+}
+
+
+module.exports.registerUser = function(req,res){
+
+    registerUser(req.body,function(err,user){
+        if(err){
+            return res.json(500,err);
+        }
+
+
+        res.json({username: user.local.username, id: user._id});
+
+    })
+}
 
 module.exports.issueToken = function(req,res){
 
@@ -40,7 +80,8 @@ module.exports.issueToken = function(req,res){
 
         //send some user profile details
         var profile = {
-            username : user.local.username
+            username : user.local.username,
+            id: user._id
             //etc
         }
 

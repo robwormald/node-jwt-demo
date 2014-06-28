@@ -1,34 +1,24 @@
-<!-- views/signup.ejs -->
-<!doctype html>
-<html ng-app="getHired">
-<head>
-  <title>Maybe I'll get Hired!</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/main.css">
-</head>
-<body>
 <div class="container">
 <div class="col-sm-6 col-sm-offset-3" >
   <h1>Signup</h1>
-  <form action="/api/sign-up" method="post">
+  <form>
     <div class="form-group">
       <label>Username</label>
-      <input type="text" class="form-control" name="username">
+      <input type="text" class="form-control" name="username" ng-model="newUser.username">
     </div>
     <div class="form-group">
       <label>Password</label>
-      <input type="password" class="form-control" name="password">
+      <input type="password" class="form-control" name="password" ng-model="newUser.password">
     </div>
     <div class="form-group">
       <label>First Name</label>
-      <input type="text" class="form-control" name="firstname">
+      <input type="text" class="form-control" name="firstname" ng-model="newUser.firstname">
     </div>
     <div class="form-group">
       <label>Last Name</label>
-      <input type="text" class="form-control" name="lastname">
+      <input type="text" class="form-control" name="lastname" ng-model="newUser.lastname">
     </div>
-    <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+    <button ng-click="doRegister()" class="btn btn-warning btn-lg">Signup</button>
   </form>
   <hr>
 
@@ -36,8 +26,3 @@
 </div>
 
 </div>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
-<script src="js/app.js"></script>
-<script src="js/controllers/controllers.js"></script>
-</body>
-</html>

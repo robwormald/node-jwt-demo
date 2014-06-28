@@ -1,26 +1,18 @@
-<!doctype html>
-<html>
-<head>
-  <title>Maybe I'll get Hired!</title>
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/main.css">
-</head>
-<body>
+
 <div class="container">
   <div class="page-header text-center">
-    <h1>Welcome, <%= user.local.firstname %>! You're going to kinda sorta like this.</h1>
+    <h1>Welcome, {{user.username}}! You're going to kinda sorta like this.</h1>
   </div>
   <div class="row">
     <div class="col-sm-12">
       <div class="well">
         <h3>User Information</h3>
           <p>
-            <strong>First Name</strong>: <%= user.local.firstname %><br>
-            <strong>Last Name</strong>: <%= user.local.lastname %><br>
-            <strong>ID</strong>: <%= user._id %><br>
-            <strong>Username</strong>: <%= user.local.username %><br>
-            <strong>Password</strong>: <%= user.local.password %>
+            <strong>First Name</strong>: {{user.username}}><br>
+            <strong>Last Name</strong>: {{user.lastname}}><br>
+            <strong>ID</strong>: {{user.id}}<br>
+            <!-- <strong>Username</strong>: <%= user.local.username %><br>
+            <strong>Password</strong>: <%= user.local.password %> -->
           </p>
       </div>
     </div>
@@ -39,5 +31,3 @@
     </div>
   </div>
 </div>
-</body>
-</html>

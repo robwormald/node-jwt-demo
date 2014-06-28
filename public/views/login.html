@@ -1,45 +1,25 @@
-<!doctype html>
-<html>
-<head>
-  <title>Maybe I'll get Hired!</title>
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/main.css">
-</head>
-<body>
 <div class="container">
 <div class="col-sm-6 col-sm-offset-3">
 
   <h1>Login</h1>
-  <form action="/api/login" method="post">
+  <form>
+      <div ng-show="error">
+          {{error}}
+      </div>
     <div class="form-group">
       <label>Username</label>
-      <input type="text" class="form-control" placeholder="what's your username?"  name="username">
+      <input type="text" class="form-control" placeholder="what's your username?"  name="username" ng-model="user.username">
     </div>
     <div class="form-group">
       <label>Password</label>
-      <input type="password" placeholder="What's your password?" class="form-control" name="password">
+      <input type="password" placeholder="What's your password?" class="form-control" name="password" ng-model="user.password">
     </div>
 
-    <button type="submit" class="btn btn-success btn-lg">Login</button>
+    <button type="submit" ng-click="doLogin()"class="btn btn-success btn-lg">Login</button>
   </form>
   <hr>
-  <p>Would you like to create an account? <a href="/sign-up">Signup</a></p>
+  <p>Would you like to create an account? <a ui-sref="app.signup">Signup</a></p>
 </div>
 </div>
 
 {{ greetMe }}
-
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
-<script>
-  angular.module('myApp', [])
-    .controller('MyController', ['$scope', function ($scope) {
-      $scope.greetMe = 'World';
-    }]);
-
-  angular.element(document).ready(function() {
-    angular.bootstrap(document, ['myApp']);
-  });
-</script>
-</body>
-</html>

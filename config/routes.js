@@ -7,15 +7,9 @@ module.exports = function(app, passport) {
 // Node Post Routes //
 //////////////////////
 
-app.post('/api/login', passport.authenticate('local-login', {
-  successRedirect : '/profile', // redirects to profile
-  failureRedirect : '/loginFailure', // redirects back to login
-}));
+//app.post('/api/login', TokenAuth.registerUser);
 
-app.post('/api/sign-up', passport.authenticate('local-signup', {
-  successRedirect : '/profile', // redirect to the secure profile section
-  failureRedirect : '/usernameTaken', // redirect back to the signup page if there is an error
-}));
+app.post('/api/sign-up', TokenAuth.registerUser);
 
 ////////////////////////////////
 // Angular Sorta-hacky Routes //
