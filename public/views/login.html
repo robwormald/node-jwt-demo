@@ -1,15 +1,12 @@
 <!doctype html>
-<html ng-app"getHired">
+<html>
 <head>
   <title>Maybe I'll get Hired!</title>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/main.css">
-  <script src="js/controllers/login.js"></script>
-  <script src="js/services/login.js"></script>
-  <script src="js/core.js"></script>
 </head>
-<body ng-controller="loginController">
+<body>
 <div class="container">
 <div class="col-sm-6 col-sm-offset-3">
 
@@ -26,10 +23,23 @@
 
     <button type="submit" class="btn btn-success btn-lg">Login</button>
   </form>
-
   <hr>
   <p>Would you like to create an account? <a href="/sign-up">Signup</a></p>
 </div>
 </div>
+
+{{ greetMe }}
+
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+<script>
+  angular.module('myApp', [])
+    .controller('MyController', ['$scope', function ($scope) {
+      $scope.greetMe = 'World';
+    }]);
+
+  angular.element(document).ready(function() {
+    angular.bootstrap(document, ['myApp']);
+  });
+</script>
 </body>
 </html>

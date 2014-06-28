@@ -19,19 +19,19 @@ mongoose.connect(dbConfig.url); // connect to our mongoDB database
 
 require('./config/passport')(passport); // passes passport for configuration
 
-  // Set-up Express Application
-  app.set('view engine', 'ejs'); // ejs templating (temporary until Angular... if I have time)
-  app.use(morgan('dev')); // Log all requests to console
-  app.use(cookieParser()); // Read cookies for auth
-  app.use(bodyParser()); // Get information from HTML forms
+// Set-up Express Application
+app.set('view engine', 'ejs'); // ejs templating 
+app.use(morgan('dev')); // Log all requests to console
+app.use(cookieParser()); // Read cookies for auth
+app.use(bodyParser()); // Get information from HTML forms
 
-  // required for passport
-  app.use(session({ secret : 'gethired' })); // Session Secret
-  app.use(passport.initialize());
-  app.use(passport.session()); // Persistent Login Sessions
-  app.use(flash()) // Connect-Flash for Flash Messages (if I have time..)
-  // Media
-  app.use(express.static(__dirname + '/public'));
+// required for passport
+app.use(session({ secret : 'gethired' })); // Session Secret
+app.use(passport.initialize());
+app.use(passport.session()); // Persistent Login Sessions
+app.use(flash()) // Connect-Flash for Flash Messages (if I have time..)
+// Media
+app.use(express.static(__dirname + '/public'));
 
 // Routing
 require('./config/routes.js')(app, passport); // Load routes and pass in our app and fully configured passport
