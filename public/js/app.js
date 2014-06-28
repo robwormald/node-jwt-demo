@@ -46,7 +46,12 @@ angular.module('getHired', [
         url: '/profile', //which is actually #/signup
         controller: 'ProfileController',
         //fetch a template from the server
-        templateUrl: 'views/profile.html'
+        templateUrl: 'views/profile.html',
+        resolve: {
+            currentUser : ['User',function(User){
+                return User.getProfile();
+            }]
+        }
     });
 
     //if none of our routes match, redirect to home
@@ -54,6 +59,15 @@ angular.module('getHired', [
 
 
 
+
+}])
+
+.run(['$rootScope','$state',function($rootScope,$state){
+
+    $rootScope.$on('$stateChangeError',function(){
+        console.log(arguments);
+        $state.go('app.home');
+    })
 
 }])
 // config(['$routeProvider', function($routeProvider) {
