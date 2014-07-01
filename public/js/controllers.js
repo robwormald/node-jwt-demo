@@ -18,7 +18,7 @@
 'use strict';
 
 // controllers
-angular.module('getHired.controllers', [])
+angular.module('authDemo.controllers', [])
   .controller('HomeController', ['$scope', function($scope) {
 
   }])
@@ -36,7 +36,7 @@ angular.module('getHired.controllers', [])
               $state.go('app.profile');
 
           },function(err){
-              $scope.error = err;
+              $scope.error = err.data;
           })
       }
 

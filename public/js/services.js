@@ -1,7 +1,7 @@
 'use strict';
 
 // controllers
-angular.module('getHired.services', [])
+angular.module('authDemo.services', [])
 
 .constant('AppUrl','http://localhost:9000')
 
@@ -24,8 +24,6 @@ angular.module('getHired.services', [])
         return $http.post(appUrl + '/api/getToken',user).then(function(res){
             _auth.token = res.data.token;
             return res.data;
-        },function(err){
-            console.log(err)
         })
     }
 

@@ -1,7 +1,7 @@
 var User = require('../app/models/user');
 var TokenAuth = require('./tokens');
 
-module.exports = function(app, passport) {
+module.exports = function(app) {
 
 ///////////////////////
 // Node Post Routes //
@@ -12,26 +12,13 @@ module.exports = function(app, passport) {
 app.post('/api/sign-up', TokenAuth.registerUser);
 
 ////////////////////////////////
-// Angular Sorta-hacky Routes //
+// serve the angular app //
 ////////////////////////////////
 
 app.get('/', function(req, res) {
     res.sendfile('./public/views/index.html');
 });
 
-app.get('/login', function(req, res) {
-  res.sendfile('./public/views/login.html');
-});
-
-app.get('/sign-up', function(req, res) {
-  res.sendfile('./public/views/signup.html');
-});
-
-app.get('/profile', isLoggedIn, function(req, res) {
-  res.render('profile.ejs', {
-    user : req.user // gets user out of session and passes to the template
-  });
-});
 
 ////////////////////////
 // Angular Auth Routes //
@@ -44,30 +31,6 @@ app.post('/api/getToken',TokenAuth.issueToken);
 app.get('/api/tokenInfo',TokenAuth.verifyToken,function(req,res){
 
     res.json(req.user);
-})
-
-
-
-////////////////////////
-// Failure Re-directs //
-////////////////////////
-
-app.get('/loginFailure', function(req, res) {
-  res.sendfile('./public/views/login-failure.html');
 });
 
-// Username is taken failure
-app.get('/usernameTaken', function(req, res) {
-  res.sendfile('./public/views/username-taken.html');
-});
-
-}
-
-// route to ensure use is logged in before viewing specific pages
-// (eg. profile)
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated())
-    return next();
-
-  res.redirect('/');
 }

@@ -5,6 +5,7 @@ var User = require('../app/models/user');
 var tokenSecret = process.env.TOKEN_SECRET || 'shhhh';
 
 function verifyUser(username, password, done) {
+  console.log(arguments)
   User.findOne({ 'local.username' : username }, function(err, user) {
     if (err)
       return done(err);
@@ -72,9 +73,13 @@ module.exports.issueToken = function(req,res){
 
     //verify
     verifyUser(username,password,function(err,user){
-
+      
         if(err){
             return res.json(403,{error: 'invalid username or password'});
+        }
+
+        if(!user){
+          return res.json(403,{error: 'invalid username or password'})
         }
 
 

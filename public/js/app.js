@@ -2,10 +2,10 @@
 
 
 // Declare app level module which depends on filters, and services
-angular.module('getHired', [
+angular.module('authDemo', [
   // 'ngRoute',
-  'getHired.services',
-  'getHired.controllers',
+  'authDemo.services',
+  'authDemo.controllers',
    'ui.router'
 ]).config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 
