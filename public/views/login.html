@@ -1,0 +1,25 @@
+<div class="container">
+<div class="col-sm-6 col-sm-offset-3">
+
+  <h1>Login</h1>
+  <form>
+      <div ng-show="error">
+          {{error}}
+      </div>
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" class="form-control" placeholder="what's your username?"  name="username" ng-model="user.username">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" placeholder="What's your password?" class="form-control" name="password" ng-model="user.password">
+    </div>
+
+    <button type="submit" ng-click="doLogin()"class="btn btn-success btn-lg">Login</button>
+  </form>
+  <hr>
+  <p>Would you like to create an account? <a ui-sref="app.signup">Signup</a></p>
+</div>
+</div>
+
+{{ greetMe }}

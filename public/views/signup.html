@@ -1,0 +1,28 @@
+<div class="container">
+<div class="col-sm-6 col-sm-offset-3" >
+  <h1>Signup</h1>
+  <form>
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" class="form-control" name="username" ng-model="newUser.username">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" class="form-control" name="password" ng-model="newUser.password">
+    </div>
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" class="form-control" name="firstname" ng-model="newUser.firstname">
+    </div>
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" class="form-control" name="lastname" ng-model="newUser.lastname">
+    </div>
+    <button ng-click="doRegister()" class="btn btn-warning btn-lg">Signup</button>
+  </form>
+  <hr>
+
+  <p>If you have an account.. <a href="/login">Login</a></p>
+</div>
+
+</div>

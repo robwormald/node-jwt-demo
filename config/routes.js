@@ -1,57 +1,36 @@
-module.exports = function(app, passport) {
+var User = require('../app/models/user');
+var TokenAuth = require('./tokens');
 
-// get /index
+module.exports = function(app) {
+
+///////////////////////
+// Node Post Routes //
+//////////////////////
+
+//app.post('/api/login', TokenAuth.registerUser);
+
+app.post('/api/sign-up', TokenAuth.registerUser);
+
+////////////////////////////////
+// serve the angular app //
+////////////////////////////////
+
 app.get('/', function(req, res) {
-  res.render('index.ejs');
-});
-
-// GET /login
-app.get('/login', function(req, res) {
-  res.render('login.ejs');
-});
-
-// POST /login
-app.post('/login', passport.authenticate('local-login', {
-  successRedirect : '/profile', // redirects to profile
-  failureRedirect : '/loginFailure', // redirects back to login
-}));
-
-// GET /sign-up
-app.get('/sign-up', function(req, res) {
-  res.render('sign-up.ejs');
-});
-
-// POST /sign-up
-app.post('/sign-up', passport.authenticate('local-signup', {
-  successRedirect : '/profile', // redirect to the secure profile section
-  failureRedirect : '/loginFailure', // redirect back to the signup page if there is an error
-}));
-
-// GET /profile
-app.get('/profile', isLoggedIn, function(req, res) {
-  res.render('profile.ejs', {
-    user : req.user // gets user out of session and passes to the template
-  });
+    res.sendfile('./public/views/index.html');
 });
 
 
-// Tests
-// Failures/Success (Tests)
-app.get('/loginFailure', function(req, res) {
-  res.render('login-failure.ejs');
+////////////////////////
+// Angular Auth Routes //
+////////////////////////
+
+//issue a token = kinda like "login"
+app.post('/api/getToken',TokenAuth.issueToken);
+
+//get a token's info / validity.
+app.get('/api/tokenInfo',TokenAuth.verifyToken,function(req,res){
+
+    res.json(req.user);
 });
 
-app.get('/loginSuccess', function(req, res) {
-  res.send('Successfully authenticated');
-});
-
-}
-
-// route to ensure use is logged in before viewing specific pages
-// (eg. profile)
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated())
-    return next();
-
-  res.redirect('/');
 }
